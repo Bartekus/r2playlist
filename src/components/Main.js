@@ -4,9 +4,7 @@ import Songs from 'components/Songs';
 import Selected from 'components/Selected';
 import Footer from './Footer';
 
-// import * as stores from '../store';
-
-import { SHOW_ALL, SHOW_SELECTED, SHOW_DESELECTED } from '../constants/Filters';
+import { SHOW_ALL, SHOW_SELECTED, SHOW_DESELECTED } from 'constants/Filters';
 
 const PLAYLIST_FILTERS = {
   [SHOW_ALL]: () => true,
@@ -32,8 +30,8 @@ export default class Main extends Component {
   };
 
   renderLibrary() {
-    const { songs, actions } = this.props;
-
+    const { songs, playlists, actions } = this.props;
+    // playlists.map((playlist) => playlist.songs.map((song, index) => console.log(song)));
     return (
       <div>
         <h4>Selected Songs</h4>

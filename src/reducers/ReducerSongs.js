@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import {
   FETCH_SONGS
-} from '../constants/Actions';
+} from 'constants/Actions';
 
 export default function(state = {}, action) {
   switch (action.type) {

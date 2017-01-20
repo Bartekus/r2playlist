@@ -42,7 +42,7 @@ export default class Playlist extends Component {
         <div className='view'>
           <input className='toggle'
             type='checkbox'
-            checked={playlist.selected}
+            value={playlist.selected}
             onChange={() => selectPlaylist(playlist.id)} />
           <label onDoubleClick={this.handleDoubleClick}>
             {playlist.name}

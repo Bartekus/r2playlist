@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
-import songs from 'reducers/ReducerSongs';
-import playlists from 'reducers/ReducerPlaylists';
-import selectedSongIds from 'reducers/ReducerSelectedSongs';
+import songs from 'reducers/reducerSongs';
+import playlists from 'reducers/reducerPlaylists';
+import selected from 'reducers/reducerSelected';
 
 const rootReducer = combineReducers({
   songs: songs,
   playlists: playlists,
-  selectedSongs: selectedSongIds
+  selected: selected
 });
 
 export default rootReducer;

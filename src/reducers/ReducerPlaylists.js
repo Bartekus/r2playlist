@@ -7,7 +7,7 @@ import {
   SELECT_PLAYLIST,
   COMPLETE_ALL,
   CLEAR_SELECTED
-} from '../constants/ActionTypes';
+} from '../constants/Actions';
 
 const initialState = [];
 

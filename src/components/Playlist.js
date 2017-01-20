@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
-import PlaylistTextInput from './PlaylistTextInput';
+import Input from './Input';
 
-export default class PlaylistItem extends Component {
+export default class Playlist extends Component {
   static propTypes = {
     playlist: PropTypes.object.isRequired,
     editPlaylist: PropTypes.func.isRequired,
@@ -33,7 +33,7 @@ export default class PlaylistItem extends Component {
     let element;
     if (this.state.editing) {
       element = (
-        <PlaylistTextInput name={playlist.name} songs={playlist.songs}
+        <Input name={playlist.name} songs={playlist.songs}
           editing={this.state.editing}
           onSave={(name, songs) => this.handleSave(playlist.id, name, songs)} />
       );

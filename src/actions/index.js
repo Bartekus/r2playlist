@@ -20,7 +20,7 @@ import {
 
   CREATE_ERROR,
   CLEAR_ERROR
-} from '../constants/ActionTypes';
+} from 'constants/Actions';
 
 const ROOT_URL = 'http://localhost:5000';
 

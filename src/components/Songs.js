@@ -3,10 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from 'actions';
 
-class Songslist extends Component {
-  componentWillMount() {
-    this.props.fetchSongs();
-  }
+class Songs extends Component {
 
   handleSongSelect({ id }, event) {
     const { selectSong, deselectSong } = this.props;
@@ -17,7 +14,7 @@ class Songslist extends Component {
     return (
       <li className='list-group-item justify-content-between' key={song.id}>
         <input
-          value={_.includes(this.props.selectedSongIds, song.id)}
+          value={_.includes(this.props.selected, song.id)}
           type='checkbox'
           onChange={this.handleSongSelect.bind(this, song)}
         />
@@ -35,10 +32,10 @@ class Songslist extends Component {
   render() {
     return (
       <ul className='list-group'>
-        {_.map(this.props.songs.all, this.renderSong.bind(this))}
+        {_.map(this.props.songs, this.renderSong.bind(this))}
       </ul>
     );
   }
 }
 
-export default connect(({songs, selectedSongIds}) => ({songs, selectedSongIds}) , actions)(Songslist);
+export default connect(({songs, selected}) => ({songs, selected}) , actions)(Songs);

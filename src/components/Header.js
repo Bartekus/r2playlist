@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import PlaylistTextInput from './PlaylistTextInput';
+import Input from './Input';
 
 export default class Header extends Component {
   static propTypes = {
@@ -16,7 +16,7 @@ export default class Header extends Component {
     return (
       <header className='header'>
         <h1>Playlist Challenge</h1>
-        <PlaylistTextInput newPlaylist
+        <Input newPlaylist
           onSave={this.handleSave}
           placeholder='Create new playlist?' />
       </header>

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
 
-export default class PlaylistTextInput extends Component {
+export default class Input extends Component {
   static propTypes = {
     onSave: PropTypes.func.isRequired,
     name: PropTypes.string,

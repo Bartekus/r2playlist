@@ -15,7 +15,7 @@ var VENDOR_LIBS = [
   'redux',
   'redux-promise',
   'redux-thunk',
-  'reselect',
+  'reselect'
 ];
 
 module.exports = {
@@ -42,6 +42,8 @@ module.exports = {
       root: path.resolve(projectRoot, 'src'),
       actions: path.resolve(projectRoot, 'src/actions'),
       components: path.join(projectRoot, 'src/components'),
+      constants: path.join(projectRoot, 'src/constants'),
+      containers: path.join(projectRoot, 'src/containers'),
       reducers: path.resolve(projectRoot, 'src/reducers'),
       selectors: path.resolve(projectRoot, 'src/selectors')
     },

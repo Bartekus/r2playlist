@@ -1,14 +1,14 @@
 import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import MainHeader from 'components/MainHeader';
+import Header from 'components/Header';
 import Main from 'components/Main';
 import * as PlaylistActions from 'actions';
 
 const Home = ({ songs, playlists, actions }) => {
   return (
     <div>
-      <MainHeader addPlaylist={actions.addPlaylist} />
+      <Header addPlaylist={actions.addPlaylist} />
       <Main songs={songs} playlists={playlists} actions={actions} />
     </div>
   );
@@ -22,7 +22,8 @@ Home.propTypes = {
 
 const mapStateToProps = state => ({
   songs: state.songs,
-  playlists: state.playlists
+  playlists: state.playlists,
+  selected: state.selected
 });
 
 const mapDispatchToProps = dispatch => ({

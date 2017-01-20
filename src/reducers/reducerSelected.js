@@ -2,11 +2,9 @@ import _ from 'lodash';
 import {
   SELECT_SONG,
   DESELECT_SONG
-} from '../constants/ActionTypes';
+} from 'constants/Actions';
 
-const INITIAL_STATE = { allSelected: [], song: null };
-
-export default function(state = INITIAL_STATE, action) {
+export default function(state = {}, action) {
   switch (action.type) {
     case SELECT_SONG:
       return [ ...state, action.payload ];

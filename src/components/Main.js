@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
-import PlaylistItem from './PlaylistItem';
-import Songslist from 'components/Songslist';
-import SelectedSongslist from 'components/SelectedSongslist';
-import MainFooter from './MainFooter';
+import Playlist from './Playlist';
+import Songs from 'components/Songs';
+import Selected from 'components/Selected';
+import Footer from './Footer';
 
-import * as stores from '../store';
+// import * as stores from '../store';
 
-import { SHOW_ALL, SHOW_SELECTED, SHOW_DESELECTED } from '../constants/PlaylistFilters';
+import { SHOW_ALL, SHOW_SELECTED, SHOW_DESELECTED } from '../constants/Filters';
 
 const PLAYLIST_FILTERS = {
   [SHOW_ALL]: () => true,
@@ -37,10 +37,10 @@ export default class Main extends Component {
     return (
       <div>
         <h4>Selected Songs</h4>
-        <SelectedSongslist />
+        <Selected />
         <hr />
         <h4>All Songs</h4>
-        <Songslist />
+        <Songs />
       </div>
     );
   }
@@ -65,7 +65,7 @@ export default class Main extends Component {
     if (playlists.length) {
       return (
         <div>
-          <MainFooter selectedCount={selectedCount}
+          <Footer selectedCount={selectedCount}
             activeCount={activeCount}
             filter={filter}
             onClearSelected={this.handleClearSelected.bind(this)}
@@ -93,7 +93,7 @@ export default class Main extends Component {
         {this.renderToggleAll(selectedCount)}
         <ul className='playlist'>
           {filteredPlaylists.map(playlist =>
-            <PlaylistItem key={playlist.id} playlist={playlist} {...actions} />
+            <Playlist key={playlist.id} playlist={playlist} {...actions} />
           )}
         </ul>
         {/*{this.renderFooter(selectedCount)}*/}

@@ -22,7 +22,7 @@ export default class PlaylistItem extends Component {
     if (name.length === 0) {
       this.props.deletePlaylist(id);
     } else {
-      this.props.editPlaylist(id, name, songs);
+      this.props.editPlaylist({ id, name, songs });
     }
     this.setState({ editing: false });
   };
@@ -33,7 +33,7 @@ export default class PlaylistItem extends Component {
     let element;
     if (this.state.editing) {
       element = (
-        <PlaylistTextInput name={playlist.name} songs={[]}
+        <PlaylistTextInput name={playlist.name} songs={playlist.songs}
           editing={this.state.editing}
           onSave={(name, songs) => this.handleSave(playlist.id, name, songs)} />
       );

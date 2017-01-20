@@ -26,7 +26,6 @@ export default function playlists(state = initialState, action) {
       return [
         {
           id: state.reduce((maxId, playlist) => Math.max(playlist.id, maxId), -1) + 1,
-          selected: false,
           name: action.name
         },
         ...state
@@ -39,7 +38,7 @@ export default function playlists(state = initialState, action) {
 
     case EDIT_PLAYLIST:
       return state.map(playlist =>
-        playlist.id === action.id ? { ...playlist, name: action.name } : playlist
+        playlist.id === action.id ? { ...playlist, name: action.name } : playlist,
       );
 
     case SELECT_PLAYLIST:

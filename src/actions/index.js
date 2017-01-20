@@ -99,8 +99,10 @@ export function fetchList(id) {
 
 export const addPlaylist = props => dispatch => {
   let name = props;
+  let songs = [];
 
-  axios.post(`${ROOT_URL}/playlist`, { name }).then(() => {
+  axios.post(`${ROOT_URL}/playlist`, { name, songs })
+  .then(() => {
     dispatch({
       type: ADD_PLAYLIST,
       name
@@ -132,17 +134,15 @@ export const deletePlaylist = (id) => dispatch => {
   });
 };
 
-export const editPlaylist = props /* (id, name, songs) */ => dispatch =>
+export const editPlaylist = (props) => dispatch => {
+  let editedPlaylist = props;
   axios.post(`${ROOT_URL}/playlist/${props.id}`, props)
-  .then((playlist) => {
+  .then(() => {
     dispatch({
       type: EDIT_PLAYLIST,
-      payload: playlist
-      /*
-        id,
-       name,
-       songs
-       */
+      id: editedPlaylist.id,
+      name: editedPlaylist.name,
+      songs: editedPlaylist.songs
     });
   }).catch(error => {
     console.log(error);
@@ -151,3 +151,4 @@ export const editPlaylist = props /* (id, name, songs) */ => dispatch =>
       payload: error
     });
   });
+};

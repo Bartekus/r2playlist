@@ -14,8 +14,9 @@ const PLAYLIST_FILTERS = {
 
 export default class Main extends Component {
   static propTypes = {
-    songs: PropTypes.object,
-    playlists: PropTypes.array,
+    Library: PropTypes.object,
+    Sets: PropTypes.array,
+    selected: PropTypes.array,
     actions: PropTypes.object
   };
 
@@ -30,7 +31,7 @@ export default class Main extends Component {
   };
 
   renderLibrary() {
-    const { songs, playlists, actions } = this.props;
+    const { Library, Sets, actions } = this.props;
     // playlists.map((playlist) => playlist.songs.map((song, index) => console.log(song)));
     return (
       <div>
@@ -44,23 +45,23 @@ export default class Main extends Component {
   }
 
   renderToggleAll(selectedCount) {
-    const { playlists, actions } = this.props;
-    if (playlists.length > 0) {
+    const { Sets, actions } = this.props;
+    if (Sets.length > 0) {
       return (
         <input className='toggle-all'
           type='checkbox'
-          checked={selectedCount === playlists.length}
+          checked={selectedCount === Sets.length}
           onChange={actions.completeAll} />
       );
     }
   }
 
   renderFooter(selectedCount) {
-    const { playlists } = this.props;
+    const { Sets } = this.props;
     const { filter } = this.state;
-    const activeCount = playlists.length - selectedCount;
+    const activeCount = Sets.length - selectedCount;
 
-    if (playlists.length) {
+    if (Sets.length) {
       return (
         <div>
           <Footer selectedCount={selectedCount}
@@ -77,11 +78,11 @@ export default class Main extends Component {
   }
 
   render() {
-    const { songs, playlists, actions } = this.props;
+    const { Library, Sets, actions } = this.props;
     const { filter } = this.state;
 
-    const filteredPlaylists = playlists.filter(PLAYLIST_FILTERS[filter]);
-    const selectedCount = playlists.reduce((count, playlist) =>
+    const filteredPlaylists = Sets.filter(PLAYLIST_FILTERS[filter]);
+    const selectedCount = Sets.reduce((count, playlist) =>
         playlist.selected ? count + 1 : count,
       0
     );

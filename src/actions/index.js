@@ -1,15 +1,15 @@
 import { browserHistory } from 'react-router';
 import axios from 'axios';
 import {
-  FETCH_SONGS,
-  FETCH_SONG,
+  FETCH_LIBRARY,
 
+  FETCH_SONG,
   SELECT_SONG,
   DESELECT_SONG,
 
-  FETCH_PLAYLISTS,
-  FETCH_PLAYLIST,
+  FETCH_SETS,
 
+  FETCH_PLAYLIST,
   ADD_PLAYLIST,
   DELETE_PLAYLIST,
   EDIT_PLAYLIST,
@@ -24,79 +24,106 @@ import {
 
 const ROOT_URL = 'http://localhost:5000';
 
-export const clearError = () => {
-  return { type: CLEAR_ERROR };
+/*
+ *
+ * General Functions and Modifiers
+ *
+ */
+export const clearError = () => ({ type: CLEAR_ERROR });
+export const selectSong = (id) => ({ type: SELECT_SONG, payload: id });
+export const deselectSong = (id) => ({ type: DESELECT_SONG, payload: id });
+export const clearSelected = () => ({ type: CLEAR_SELECTED });
+export const completeAll = () => ({ type: COMPLETE_ALL });
+
+export const selectPlaylist = (id) => ({ type: SELECT_PLAYLIST, id: id });
+
+/*
+ *
+ * GET Library
+ *
+ */
+export const fetchLibrary = () => dispatch => {
+  axios.get(`${ROOT_URL}/library`).then((Library) => {
+    dispatch({
+      type: FETCH_LIBRARY,
+      payload: Library
+    });
+  }).catch(error => {
+    console.log(error);
+    dispatch({
+      type: CREATE_ERROR,
+      payload: error
+    });
+  });
 };
 
 /*
  *
- * Library
+ * GET Song by song.id
  *
  */
-export function fetchSongs() {
-  const request = axios.get(`${ROOT_URL}/library`);
-
-  return {
-    type: FETCH_SONGS,
-    payload: request
-  };
-}
-
-export function fetchSong(id) {
-  const request = axios.get(`${ROOT_URL}/library/${id}`);
-
-  return {
-    type: FETCH_SONG,
-    payload: request
-  };
-}
-
-export function selectSong(id) {
-  return {
-    type: SELECT_SONG,
-    payload: id
-  };
-}
-
-export function deselectSong(id) {
-  return {
-    type: DESELECT_SONG,
-    payload: id
-  };
-}
+export const fetchSong = (id) => dispatch => {
+  axios.get(`${ROOT_URL}/library/${id}`).then((song) => {
+    dispatch({
+      type: FETCH_SONG,
+      payload: song
+    });
+  }).catch(error => {
+    console.log(error);
+    dispatch({
+      type: CREATE_ERROR,
+      payload: error
+    });
+  });
+};
 
 /*
  *
- * Playlist
+ * GET Playlist Sets
  *
  */
-export const selectPlaylist = id => ({
-  type: SELECT_PLAYLIST,
-  id
-});
+export const fetchSets = () => dispatch => {
+  axios.get(`${ROOT_URL}/playlist`)
+  .then((Sets) => {
+    dispatch({
+      type: FETCH_SETS,
+      payload: Sets
+    });
+  }).catch(error => {
+    console.log(error);
+    dispatch({
+      type: CREATE_ERROR,
+      payload: error
+    });
+  });
+};
 
-export const completeAll = () => ({ type: COMPLETE_ALL });
+/*
+ *
+ * GET Playlist by (id)
+ *
+ */
+export const fetchPlaylist = (id) => dispatch => {
+  axios.get(`${ROOT_URL}/playlist/${id}`)
+  .then((playlist) => {
+    dispatch({
+      type: FETCH_PLAYLIST,
+      payload: playlist
+  });
+  }).catch(error => {
+    console.log(error);
+    dispatch({
+      type: CREATE_ERROR,
+      payload: error
+    });
+  });
+};
 
-export const clearSelected = () => ({ type: CLEAR_SELECTED });
-
-export function fetchLists() {
-  const request = axios.get(`${ROOT_URL}/playlist`);
-
-  return {
-    type: FETCH_PLAYLISTS,
-    payload: request
-  };
-}
-
-export function fetchList(id) {
-  const request = axios.get(`${ROOT_URL}/playlist/${id}`);
-
-  return {
-    type: FETCH_PLAYLIST,
-    payload: request
-  };
-}
-
+/*
+ *
+ * POST Playlist with (props)
+ *
+ */
 export const addPlaylist = props => dispatch => {
   let name = props;
   let songs = [];
@@ -116,6 +143,11 @@ export const addPlaylist = props => dispatch => {
   });
 };
 
+/*
+ *
+ * DELETE Playlist by (id)
+ *
+ */
 export const deletePlaylist = (id) => dispatch => {
   let playlistID = id;
 
@@ -134,6 +166,11 @@ export const deletePlaylist = (id) => dispatch => {
   });
 };
 
+/*
+ *
+ * POST Playlist by (id) with (props)
+ *
+ */
 export const editPlaylist = (props) => dispatch => {
   let editedPlaylist = props;
   axios.post(`${ROOT_URL}/playlist/${props.id}`, props)

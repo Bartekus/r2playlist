@@ -1,5 +1,5 @@
 import {
-  FETCH_PLAYLISTS,
+  FETCH_SETS,
   FETCH_PLAYLIST,
   ADD_PLAYLIST,
   DELETE_PLAYLIST,
@@ -11,9 +11,9 @@ import {
 
 const initialState = [];
 
-export default function playlists(state = initialState, action) {
+export default function Sets(state = initialState, action) {
   switch (action.type) {
-    case FETCH_PLAYLISTS:
+    case FETCH_SETS:
       return action.payload.data;
 
     case FETCH_PLAYLIST:

@@ -4,7 +4,7 @@ import {
   DESELECT_SONG
 } from 'constants/Actions';
 
-export default function(state = {}, action) {
+export default function(state = [], action) {
   switch (action.type) {
     case SELECT_SONG:
       return [ ...state, action.payload ];

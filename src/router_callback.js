@@ -1,10 +1,10 @@
 import store from './store';
-import { fetchSongs, fetchLists } from './actions';
+import { fetchLibrary, fetchSets } from 'actions';
 
 export function onHomeEnter() {
-  store.dispatch(fetchSongs());
+  store.dispatch(fetchLibrary());
 }
 
 export function onMainEnter() {
-  store.dispatch(fetchLists());
+  store.dispatch(fetchSets());
 }

@@ -5,24 +5,25 @@ import Header from 'components/Header';
 import Main from 'components/Main';
 import * as PlaylistActions from 'actions';
 
-const Home = ({ songs, playlists, actions }) => {
+const Home = ({ Library, Sets, selected, actions }) => {
   return (
     <div>
       <Header addPlaylist={actions.addPlaylist} />
-      <Main songs={songs} playlists={playlists} actions={actions} />
+      <Main Library={Library} Sets={Sets} selected={selected} actions={actions} />
     </div>
   );
 };
 
 Home.propTypes = {
-  songs: PropTypes.object.isRequired,
-  playlists: PropTypes.array.isRequired,
+  Library: PropTypes.object.isRequired,
+  Sets: PropTypes.array.isRequired,
+  selected: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  songs: state.songs,
-  playlists: state.playlists,
+  Library: state.Library,
+  Sets: state.Sets,
   selected: state.selected
 });
 
@@ -31,8 +32,9 @@ const mapDispatchToProps = dispatch => ({
 });
 
 Home.defaultProps = {
-  songs: {},
-  playlists: []
+  Library: {},
+  Sets: [],
+  selected: []
 };
 
 export default connect(

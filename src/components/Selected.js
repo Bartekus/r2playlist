@@ -6,7 +6,7 @@ const Selected = (props) => {
   return (
     <ul className='list-group'>
       {
-        props.songs.map(song => {
+        props.Library.map(song => {
           return <li className='list-group-item' key={song.id}>{song.title}</li>
         })
       }
@@ -16,7 +16,7 @@ const Selected = (props) => {
 
 const mapStateToProps = state => {
   return {
-    songs: selectedSongs(state)
+    Library: selectedSongs(state)
   };
 };
 

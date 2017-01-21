@@ -32,10 +32,10 @@ class Songs extends Component {
   render() {
     return (
       <ul className='list-group'>
-        {_.map(this.props.songs, this.renderSong.bind(this))}
+        {_.map(this.props.Library, this.renderSong.bind(this))}
       </ul>
     );
   }
 }
 
-export default connect(({songs, selected}) => ({songs, selected}) , actions)(Songs);
+export default connect(({Library, selected}) => ({Library, selected}) , actions)(Songs);

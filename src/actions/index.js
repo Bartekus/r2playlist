@@ -1,23 +1,18 @@
-import { browserHistory } from 'react-router';
 import axios from 'axios';
 import {
   FETCH_LIBRARY,
-
   FETCH_SONG,
   SELECT_SONG,
   DESELECT_SONG,
-
   FETCH_SETS,
-
   FETCH_PLAYLIST,
   ADD_PLAYLIST,
   DELETE_PLAYLIST,
   EDIT_PLAYLIST,
-
   SELECT_PLAYLIST,
+  LOAD_FROM_PLAYLIST,
   COMPLETE_ALL,
   CLEAR_SELECTED,
-
   CREATE_ERROR,
   CLEAR_ERROR
 } from 'constants/Actions';
@@ -35,7 +30,26 @@ export const deselectSong = (id) => ({ type: DESELECT_SONG, payload: id });
 export const clearSelected = () => ({ type: CLEAR_SELECTED });
 export const completeAll = () => ({ type: COMPLETE_ALL });
 
-export const selectPlaylist = (id) => ({ type: SELECT_PLAYLIST, id: id });
+// export const selectPlaylist = (id) => ({ type: SELECT_PLAYLIST, payload: id });
+export const selectPlaylist = (id) => dispatch => {
+  axios.get(`${ROOT_URL}/playlist/${id}`).then((playlist) => {
+    dispatch({
+      type: LOAD_FROM_PLAYLIST,
+      payload: playlist.data
+    });
+    dispatch({
+      type: SELECT_PLAYLIST,
+      payload: id
+    });
+
+  }).catch(error => {
+    console.log(error);
+    dispatch({
+      type: CREATE_ERROR,
+      payload: error
+    });
+  });
+};
 
 /*
  *
